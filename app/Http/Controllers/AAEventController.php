@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AAEvent;
 use App\Services\EventService;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEventRequest;
 
-class EventController extends Controller
+class AAEventController extends Controller
 {
     
     public function __construct(private EventService $eventService)
@@ -30,13 +31,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'location'    => 'required|string',
-            'start_date'  => 'required|date',
-            'end_date'    => 'required|date|after:start_date',
-        ]);
+     
 
         $this->eventService->createEvent($request->validated());
 
@@ -49,21 +44,13 @@ class EventController extends Controller
         return view('events.edit', compact('event'));
     }
 
-    public function update(Request $request, AAEvent $event)  
-    {
-        $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'location'    => 'required|string',
-            'start_date'  => 'required|date',
-            'end_date'    => 'required|date|after:start_date',
-        ]);
+public function update(StoreEventRequest $request, AAEvent $event)
+{
+    $this->eventService->updateEvent($event, $request->validated());
 
-        $this->eventService->updateEvent($event, $request->validated());
-
-        return redirect()->route('events.index')
-                         ->with('success', 'Event updated successfully.');
-    }
+    return redirect()->route('events.index')
+                     ->with('success', 'Event updated successfully.');
+}
 
     public function destroy(AAEvent $event)  
     {
@@ -75,7 +62,10 @@ class EventController extends Controller
 
     public function calendar()
     {
+        
         $events = $this->eventService->getUpcomingEvents();
         return view('calendar.index', compact('events'));
     }
+
+   
 }

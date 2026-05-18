@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 
 class AAEvent extends Model
@@ -37,4 +38,29 @@ class AAEvent extends Model
                      ->withTimestamps();
 
     }
+    
+public function scopeUpcoming($query)
+{
+    return $query->where('start_date', '>=', now());
+}
+
+
+public function scopeByOrganizer($query, $userId)
+{
+    return $query->where('user_id', $userId);
+}
+protected function startDate(): Attribute
+{
+    return Attribute::make(
+        get: fn($value) => \Carbon\Carbon::parse($value)->format('d M Y'),
+    );
+}
+
+
+protected function title(): Attribute
+{
+    return Attribute::make(
+        set: fn($value) => ucfirst($value),
+    );
+}
 }
