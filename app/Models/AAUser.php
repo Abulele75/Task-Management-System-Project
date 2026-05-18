@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class AAUser extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -46,4 +46,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+        
+    public function events(){
+        return $this->hasMany(AAEvent::class);
+    }
+
+    public function registrations(){
+        return $this->hasMany(AARegistration::class);
+
+    }
+
+    public function isAdmin(){
+        return $this->role === 'admin';
+    }
+    public function isOrganiser(){
+        return $this->role === 'organizer';
+    }
+    public function isAttendee(){
+        return $this->role ==='attendee';
+    }
 }
+
