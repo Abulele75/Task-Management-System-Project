@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class AAEvent extends Model
 {
+
+    protected $table = 'events';
+
     protected $fillable = [
         'title',
         'description',
