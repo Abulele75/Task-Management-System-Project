@@ -25,6 +25,7 @@
                                 <th class="p-2 text-left">Status</th>
                                 <th class="p-2 text-left">Deadline</th>
                                 <th class="p-2 text-left">Actions</th>
+                                <th class="p-2 text-left">Category</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,7 @@
                                                 class="text-red-500 ml-2">Delete</button>
                                     </form>
                                 </td>
+                                <td class="p-2'>{{ $task -> <category-></category->category ? $task->category->name : 'No Category' }}</td>
                             </tr>
                             @endforeach
                         </tbody>
