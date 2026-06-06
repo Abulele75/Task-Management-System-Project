@@ -17,6 +17,8 @@ class TaskController extends Controller
 
     public function create() {
         return view('tasks.create');
+         $categories= Category::all();
+        return view('tasks.create', compact('categories'));
     }
 
     public function store(Request $request) {
@@ -35,6 +37,7 @@ class TaskController extends Controller
             'status' => $request->status,
             'deadline' => $request->deadline,
             'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('tasks.index');
