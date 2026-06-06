@@ -42,6 +42,16 @@
                         <label>Deadline</label>
                         <input type="date" name="deadline" class="border w-full p-2 rounded"/>
                     </div>
+                    
+                    <div class="mb-4">
+                        <label>Category</label>
+                            <select name="category_id" class="border w-full p-2 rounded">
+                                <option value="">No Category</option>
+                                    @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                            </select>
+                    </div>
 
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
                         Create Task
