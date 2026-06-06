@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\AAEvent;
+use App\Observers\EventObserver;
+use App\Policies\EventPolicy;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+           AAEvent::observe(EventObserver::class);
+
+           //Registering policy
+            Gate::policy(AAEvent::class, EventPolicy::class);
     }
 }

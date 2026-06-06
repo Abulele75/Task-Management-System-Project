@@ -7,7 +7,7 @@ use App\Models\AARegistration;
 use App\Services\RegistrationService;
 use Illuminate\Http\Request;
 
-class RegistrationController extends Controller
+class AARegistrationController extends Controller
 {
     
     public function __construct(private RegistrationService $registrationService)

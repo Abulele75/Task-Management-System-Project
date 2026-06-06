@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\AAEvent;
 use App\Models\AARegistration;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\EventNotification;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationService
 {
@@ -29,11 +31,25 @@ class RegistrationService
 
     public function approve(AARegistration $registration)
     {
-        $registration->update(['status' => 'approved']);
+      $registration->update(['status' => 'approved']);
+    
+    
+    Mail::to($registration->user->email)
+        ->send(new EventNotification(
+            $registration->event,
+            'Your registration has been approved!'
+        ));
     }
 
     public function decline(AARegistration $registration)
     {
-        $registration->update(['status' => 'declined']);
+       $registration->update(['status' => 'declined']);
+
+    
+    Mail::to($registration->user->email)
+        ->send(new EventNotification(
+            $registration->event,
+            'Your registration has been declined.'
+        ));
     }
 }

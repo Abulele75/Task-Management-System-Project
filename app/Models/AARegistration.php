@@ -9,6 +9,10 @@ class AARegistration extends Model
 {
     use HasFactory;
 
+
+   
+    protected $table = 'registrations';
+
     protected $fillable = [
         'event_id',
         'user_id',

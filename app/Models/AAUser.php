@@ -18,10 +18,14 @@ class AAUser extends Authenticatable
      *
      * @var list<string>
      */
+  
+     protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -29,6 +33,8 @@ class AAUser extends Authenticatable
      *
      * @var list<string>
      */
+
+
     protected $hidden = [
         'password',
         'remember_token',
