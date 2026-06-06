@@ -13,9 +13,8 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
-{
-    /**
+class RegisteredUserController extends controller{
+        /**
      * Display the registration view.
      */
     public function create(): View
@@ -33,7 +32,7 @@ class RegisteredUserController extends Controller
         $request->validate(
             [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -48,5 +47,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
-    }
+
+}
 }

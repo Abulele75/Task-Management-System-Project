@@ -5,6 +5,7 @@ use App\Http\Controllers\AAEventController;
 use App\Http\Controllers\AARegistrationController;
 use App\Http\Controllers\AAUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,4 +48,6 @@ Route::middleware(['auth', 'throttle:60,1'])->group(function () {
         Route::put('/users/{user}/role', [AAUserController::class, 'updateRole'])->name('users.updateRole');
     });
 
+
+      Route::resource('tasks', TaskController::class)->middleware('auth');
 });
