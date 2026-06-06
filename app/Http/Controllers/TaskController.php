@@ -44,6 +44,8 @@ class TaskController extends Controller
     }
     public function edit(Task $task) {
     return view('tasks.edit', compact('task'));
+        $categories = Category::all();
+        return view ('tasks.edit', compact ('task', 'categories'));
 }
 
 public function update(Request $request, Task $task) {
