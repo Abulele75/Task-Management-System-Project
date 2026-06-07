@@ -8,6 +8,7 @@ use App\Models\AAUser;
 
 class AdminMiddleware
 {
+<<<<<<< Updated upstream
     /**
      * Handle an incoming request.
      *
@@ -19,6 +20,15 @@ class AdminMiddleware
         if(!$user || $user->role !== 'admin'){
             return redirect()->route('dashboard')
             ->with('error' , 'Access denied - Admins only');
+=======
+    public function handle(Request $request, Closure $next)
+    {
+       
+        $user = $request->user();
+        if (!$user || $user->role !== 'admin') {
+            return redirect()->route('dashboard')
+                   ->with('error', 'Access denied — Admins only');
+>>>>>>> Stashed changes
         }
         return $next($request);
     }

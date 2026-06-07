@@ -35,8 +35,12 @@
                                 <th class="p-2 text-left">Status</th>
                                 <th class="p-2 text-left">Deadline</th>
                                 <th class="p-2 text-left">Category</th>
-                                <th class="p-2 text-left">Assigned To</th>
                                 <th class="p-2 text-left">Actions</th>
+<<<<<<< Updated upstream
+                                <th class="p-2 text-left">Category</th>
+=======
+                                <th class="p-2 text-left">Assigned To</th>
+>>>>>>> Stashed changes
                             </tr>
                         </thead>
                         <tbody>
@@ -63,6 +67,7 @@
                                         </form>
                                     @endif
                                 </td>
+                                <td class="p-2'>{{ $task -> <category-></category->category ? $task->category->name : 'No Category' }}</td>
                             </tr>
                             @endforeach
                         </tbody>
