@@ -22,7 +22,7 @@ class IsOrganizer
         $user = Auth::user();
         
 
-        if(!Auth()->check() || !Auth()->$user->isOrganizer()){
+        if (!Auth::check() || !$user || !$user->isOrganizer()) {
             return redirect('/dashboard')
                    ->with('error', 'Access denied. Organizers only.');
         }

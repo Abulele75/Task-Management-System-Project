@@ -65,3 +65,8 @@ abaae792912fd95675b688359d6dd31741b13d70
 =======
 # Task-Management-System-Project
 >>>>>>> a98e584a8502b1cdf8f99e6f551693daf63d1bd2
+## Email Setup
+1. Copy .env.example to .env
+2. Replace MAIL_USERNAME with your Gmail
+3. Replace MAIL_PASSWORD with your Gmail App Password
+4. Run: php artisan reminders:send to test

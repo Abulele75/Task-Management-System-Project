@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            //
-        });
-    }
+   Schema::table('tasks', function (Blueprint $table) {
+        $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            //
-        });
+            Schema::table('tasks', function (Blueprint $table) {
+        $table->dropColumn('assigned_to');
+    });
     }
 };
+

@@ -48,6 +48,18 @@
                                value="{{ $task->deadline }}"
                                class="border w-full p-2 rounded"/>
                     </div>
+                    <div class="mb-4">
+    <label>Category</label>
+    <select name="category_id" class="border w-full p-2 rounded">
+        <option value="">No Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" 
+                {{ $task->category_id == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
                     <div class="mb-4">
     <label>Category</label>

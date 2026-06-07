@@ -18,10 +18,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-          /** @var AAUser $user */
+        /** @var AAUser|null $user */
         $user = Auth::user();
 
-        if(!Auth()::check() || !$user || !$user->isAdmin()){
+        if(!Auth::check() || !$user || !$user->isAdmin()){
             return redirect('/dashboard')
                     ->with('error','Access denied. Admins only.');
         }

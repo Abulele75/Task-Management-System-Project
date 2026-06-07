@@ -18,18 +18,18 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', Auth::id())->get();
         }
         return view('tasks.index', compact('tasks'));
+    
     }
 
     public function create() {
         if(Auth::user()->role==='guest'){
-        return redirect()->route('tasks.index')
-            ->with('error' , 'Guests cannot create tasks');
+            return redirect()->route('tasks.index')
+                ->with('error' , 'Guests cannot create tasks');
         }
-        
-        
-         $categories= Category::all();
+
+        $categories = Category::all();
         $users = AAUser::all();
-        return view('tasks.create', compact('categories' , 'users'));
+        return view('tasks.create', compact('categories', 'users'));
     }
 
     public function store(Request $request) {
@@ -38,6 +38,7 @@ class TaskController extends Controller
             'priority' => 'required',
             'status' => 'required',
             'deadline' => 'required|date',
+            'category_id'=> 'nullable|exists:categories,id',
         ]);
 
         Task::create([

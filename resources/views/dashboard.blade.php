@@ -8,6 +8,12 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    @if(Auth::user()->role === 'admin')
+    <a href="{{ route('admin.index') }}" 
+       class="bg-red-500 text-white px-4 py-2 rounded mt-4 inline-block">
+        Admin Panel
+    </a>
+@endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

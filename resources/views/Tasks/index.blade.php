@@ -9,10 +9,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <a href="{{ route('tasks.create') }}" 
-                   class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
-                    + Create Task
-                </a>
+                {{-- error message --}}
+                @if(session('error'))
+                    <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                {{-- hide create button from guests --}}
+                @if(Auth::user()->role !== 'guest')
+                    <a href="{{ route('tasks.create') }}" 
+                       class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
+                        + Create Task
+                    </a>
+                @endif
 
                 @if($tasks->isEmpty())
                     <p class="text-gray-500 mt-4">No tasks yet — create one!</p>
@@ -24,8 +34,13 @@
                                 <th class="p-2 text-left">Priority</th>
                                 <th class="p-2 text-left">Status</th>
                                 <th class="p-2 text-left">Deadline</th>
-                                <th class="p-2 text-left">Actions</th>
                                 <th class="p-2 text-left">Category</th>
+                                <th class="p-2 text-left">Actions</th>
+<<<<<<< Updated upstream
+                                <th class="p-2 text-left">Category</th>
+=======
+                                <th class="p-2 text-left">Assigned To</th>
+>>>>>>> Stashed changes
                             </tr>
                         </thead>
                         <tbody>
@@ -35,16 +50,22 @@
                                 <td class="p-2">{{ $task->priority }}</td>
                                 <td class="p-2">{{ $task->status }}</td>
                                 <td class="p-2">{{ $task->deadline }}</td>
+                                <td class="p-2">{{ $task->category ? $task->category->name : 'No Category' }}</td>
+                                <td class="p-2">{{ $task->assignedTo ? $task->assignedTo->name : 'Unassigned' }}</td>
                                 <td class="p-2">
-                                    <a href="{{ route('tasks.edit', $task->id) }}" 
-                                       class="text-blue-500">Edit</a>
-                                    <form action="{{ route('tasks.destroy', $task->id) }}" 
-                                          method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="text-red-500 ml-2">Delete</button>
-                                    </form>
+                                    {{-- hide edit/delete from guests --}}
+                                    @if(Auth::user()->role !== 'guest')
+                                        <a href="{{ route('tasks.edit', $task->id) }}" 
+                                           class="text-blue-500">Edit</a>
+                                        <form action="{{ route('tasks.destroy', $task->id) }}" 
+                                              method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    onclick="return confirm('Are you sure?')"
+                                                    class="text-red-500 ml-2">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                                 <td class="p-2'>{{ $task -> <category-></category->category ? $task->category->name : 'No Category' }}</td>
                             </tr>
