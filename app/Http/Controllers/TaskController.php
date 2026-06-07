@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 use App\Models\AAUser;
+use App\Models\Category;
 
 class TaskController extends Controller
 {
