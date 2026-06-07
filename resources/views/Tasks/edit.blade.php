@@ -25,6 +25,19 @@
                     </div>
 
                     <div class="mb-4">
+                        <label>Category</label>
+                        <select name="category_id" class="border w-full p-2 rounded">
+                            <option value="">No Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" 
+                                    {{ $task->category_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
                         <label>Priority</label>
                         <select name="priority" class="border w-full p-2 rounded">
                             <option value="low" {{ $task->priority == 'low' ? 'selected' : '' }}>Low</option>
@@ -48,31 +61,7 @@
                                value="{{ $task->deadline }}"
                                class="border w-full p-2 rounded"/>
                     </div>
-                    <div class="mb-4">
-    <label>Category</label>
-    <select name="category_id" class="border w-full p-2 rounded">
-        <option value="">No Category</option>
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}" 
-                {{ $task->category_id == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
-            </option>
-        @endforeach
-    </select>
-</div>
 
-                    <div class="mb-4">
-    <label>Category</label>
-    <select name="category_id" class="border w-full p-2 rounded">
-        <option value="">No Category</option>
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}" 
-                {{ $task->category_id == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
-            </option>
-        @endforeach
-    </select>
-</div>
                     <div class="flex gap-4">
                         <button type="submit" 
                                 class="bg-blue-500 text-white px-4 py-2 rounded">
