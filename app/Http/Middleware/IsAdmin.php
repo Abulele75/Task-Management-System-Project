@@ -21,7 +21,7 @@ class IsAdmin
           /** @var AAUser $user */
         $user = Auth::user();
 
-        if(!Auth()->check() || !Auth()->user->isAdmin()){
+        if(!Auth()::check() || !$user || !$user->isAdmin()){
             return redirect('/dashboard')
                     ->with('error','Access denied. Admins only.');
         }
